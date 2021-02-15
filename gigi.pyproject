@@ -1,3 +1,3 @@
 {
-    "files": ["main.py","tags.js","Taskdialog.qml","kiwi/agent/proxy.py","op_serv.py","Mainview.qml","gigi_tags.py","orange/proxy.py","selfconf.py","Splash.qml","proxy.py","callguiwindow.qml","tips","ResultSave.qml","window.qml","Upcam.qml","Mech.qml"]
+    "files": ["callguiwindow.qml","Taskdialog.qml","op_serv.py","tags.js","ResultSave.qml","Mainview.qml","Upcam.qml","window.qml","Mech.qml","gigi_tags.py","proxy.py","main.py","selfconf.py","Splash.qml","kiwi/agent/proxy.py","tips","orange/proxy.py","kiwi/meta/sh_misc.py"]
 }

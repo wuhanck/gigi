@@ -91,6 +91,10 @@ class Bi(QObject):
     def d2dist(self, tag, dist):
         call_serv(_kiwi.d_move(False, dist), self.gen_cb(tag))
 
+    @Slot(int, float)
+    def d2rel(self, tag, dist):
+        call_serv(_kiwi.d_move(True, dist), self.gen_cb(tag))
+
     @Slot(int)
     def d2min(self, tag):
         call_serv(_kiwi.d_move_min(), self.gen_cb(tag))

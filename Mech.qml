@@ -20,7 +20,7 @@ Window {
         property string vStatus: qsTr("未更新")
         property string dStatus: qsTr("未更新")
         Grid {
-            columns: 2
+            columns: 6
             spacing: root.defaultSpacing
             width: parent.width
             Label {text: qsTr("U轴:")}
@@ -59,7 +59,24 @@ Window {
             width: parent.width
             height: 1
         }
-        Label {id: s2pLabel; text: "Stand by"}
+        Grid {
+            columns: 2
+            Button {
+                id: s2pBtn
+                width: col.cellWidth
+                text: qsTr("停止到平面(法向U/V/D)")
+                onClicked: {
+                    var u0 = parseFloat(u0Txt.text)
+                    var v0 = parseFloat(v0Txt.text)
+                    var d0 = parseFloat(d0Txt.text)
+                    s2pBtn.enabled = false
+                    function _(ret) {s2pBtn.enabled = true; s2pLabel.text = JSON.stringify(ret)}
+                    var tag = root.tags.push(_)
+                    bi.stop2plane(tag, u0, v0, d0)
+                }
+            }
+            Label {id: s2pLabel; text: "Stand by"}
+        }
         Grid {
             columns: 3
             spacing: root.defaultSpacing
@@ -68,20 +85,7 @@ Window {
             TextField {id: v0Txt; text: "0"}
             TextField {id: d0Txt; text: "100"}
         }
-        Button {
-            id: s2pBtn
-            width: col.cellWidth
-            text: qsTr("停止到平面")
-            onClicked: {
-                var u0 = parseFloat(u0Txt.text)
-                var v0 = parseFloat(v0Txt.text)
-                var d0 = parseFloat(d0Txt.text)
-                s2pBtn.enabled = false
-                function _(ret) {s2pBtn.enabled = true; s2pLabel.text = JSON.stringify(ret)}
-                var tag = root.tags.push(_)
-                bi.stop2plane(tag, u0, v0, d0)
-            }
-        }
+
         Rectangle {
             color: root.palette.text
             width: parent.width
@@ -334,6 +338,35 @@ Window {
                     bi.dstop(tag)
                 }
             }
+            Button {
+                id: drelpBtn
+                width: col.cellWidth
+                text: qsTr("D轴正向相对移动")
+                onClicked: {
+                    var dist = parseFloat(drelpTxt.text)
+                    drelpBtn.enabled = false
+                    function _() {drelpBtn.enabled = true}
+                    var tag = root.tags.push(_)
+                    bi.d2rel(tag, dist)
+                }
+            }
+            TextField {id: drelpTxt; text: "0.5"}
+            Label {text: " "}
+
+            Button {
+                id: drelnBtn
+                width: col.cellWidth
+                text: qsTr("D轴反向相对移动")
+                onClicked: {
+                    var dist = parseFloat(drelnTxt.text)
+                    drelnBtn.enabled = false
+                    function _() {drelnBtn.enabled = true}
+                    var tag = root.tags.push(_)
+                    bi.d2rel(tag, -dist)
+                }
+            }
+            TextField {id: drelnTxt; text: "0.5"}
+            Label {text: " "}
         }
     }
 }
