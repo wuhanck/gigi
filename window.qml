@@ -12,7 +12,7 @@ QtObject {
     property var controlWindow: Window {
         title: qsTr("主控制窗口")
         //width: col.implicitWidth + root.defaultSpacing * 2
-        width: 600 + root.defaultSpacing * 2
+        width: 800 + root.defaultSpacing * 2
         height: col.implicitHeight + root.defaultSpacing * 2
         color: root.palette.window
         Column {
@@ -52,7 +52,7 @@ QtObject {
             }
             property string procStage: qsTr("Stand by")
             Grid {
-                columns: 2
+                columns: 4
                 spacing: root.defaultSpacing
                 width: parent.width
                 Label {text: qsTr("type(0 for orange;1 for melon):")}
@@ -75,6 +75,14 @@ QtObject {
                 TextField {id: arg7}
                 Label {text: qsTr("arg8:")}
                 TextField {id: arg8}
+                Label {text: qsTr("arg9:")}
+                TextField {id: arg9}
+                Label {text: qsTr("arg10:")}
+                TextField {id: arg10}
+                Label {text: qsTr("arg11:")}
+                TextField {id: arg11}
+                Label {text: qsTr("arg12:")}
+                TextField {id: arg12}
             }
             Button {
                 id: callProcBtn
@@ -83,7 +91,8 @@ QtObject {
                 onClicked: {
                     callProcBtn.enabled = false
                     const proctype = proc_type.text
-                    const args = [arg1.text, arg2.text, arg3.text, arg4.text, arg5.text, arg6.text, arg7.text, arg8.text]
+                    const args = [arg1.text, arg2.text, arg3.text, arg4.text, arg5.text, arg6.text,
+                                  arg7.text, arg8.text, arg9.text, arg10.text, arg11.text, arg12.text]
                     const jargs = JSON.stringify(args)
                     function fin_proc(ret) {
                         col.procStage = qsTr("Last result: ") + ret.toString() + qsTr(". Stand by")
@@ -131,11 +140,13 @@ QtObject {
                 height: 1
             }
             Grid {
-                columns: 2
+                columns: 4
                 spacing: root.defaultSpacing
                 width: parent.width
                 Label {text: qsTr("return:")}
                 TextField {id: callguiret; text: "ok"}
+                Label {text: qsTr(" ")}
+                Label {text: qsTr(" ")}
                 Label {text: qsTr("arg1:")}
                 TextField {id: callguiarg1; text: "1"}
                 Label {text: qsTr("arg2:")}
@@ -152,6 +163,14 @@ QtObject {
                 TextField {id: callguiarg7}
                 Label {text: qsTr("arg8:")}
                 TextField {id: callguiarg8}
+                Label {text: qsTr("arg9:")}
+                TextField {id: callguiarg9}
+                Label {text: qsTr("arg10:")}
+                TextField {id: callguiarg10}
+                Label {text: qsTr("arg11:")}
+                TextField {id: callguiarg11}
+                Label {text: qsTr("arg12:")}
+                TextField {id: callguiarg12}
             }
             Button {
                 id: callGuiBtn
@@ -159,7 +178,8 @@ QtObject {
                 text: qsTr("Ready to reply")
                 onClicked: {
                     const args = [callguiret.text, callguiarg1.text, callguiarg2.text, callguiarg3.text, callguiarg4.text,
-                                  callguiarg5.text, callguiarg6.text, callguiarg7.text, callguiarg8.text]
+                                  callguiarg5.text, callguiarg6.text, callguiarg7.text, callguiarg8.text,
+                                  callguiarg9.text, callguiarg10.text, callguiarg11.text, callguiarg12.text]
                     const ret = JSON.stringify(args)
                     bi.ret_call_gui(parent.procTag, ret)
                     callguiWindow.visible = false
